@@ -6,23 +6,6 @@ BACKUP_DIR=/home/admin/vue-peach_backup
 DEPLOY_DIR=/home/admin/vue-peach_new
 NGINX_CONF=/etc/nginx/conf.d/vue-peach.conf
 
-# 检查是否安装了 pnpm
-if ! command -v pnpm &> /dev/null
-then
-    echo "pnpm 不存在，正在安装 pnpm..."
-    npm install pnpm -g
-fi
-
-# 清空并安装依赖
-echo "清空并安装依赖..."
-rm -rf node_modules
-rm -f pnpm-lock.yaml
-pnpm install
-
-# 构建项目
-echo "构建项目..."
-pnpm run build
-
 # 创建新的部署目录
 echo "创建新的部署目录..."
 rm -rf $DEPLOY_DIR
