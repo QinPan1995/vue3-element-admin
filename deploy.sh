@@ -10,9 +10,7 @@ NGINX_CONF=/etc/nginx/conf.d/vue-peach.conf
 echo "创建新的部署目录..."
 rm -rf $DEPLOY_DIR
 mkdir -p $DEPLOY_DIR
-# 进入项目目录
-cd $PROJECT_DIR
-cp -r dist/* $DEPLOY_DIR
+cp -r $PROJECT_DIR/* $DEPLOY_DIR
 
 # 备份旧版本并替换为新版本
 echo "备份旧版本并替换为新版本..."
@@ -31,7 +29,7 @@ server {
     server_name 120.76.206.153;
 
     location / {
-                        root /home/admin/vue-peach;
+                        root /home/admin/vue-peach/dist;
                         index index.html index.htm;
         }
         # 反向代理配置
