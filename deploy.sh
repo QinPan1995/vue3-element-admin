@@ -10,6 +10,8 @@ NGINX_CONF=/etc/nginx/conf.d/vue-peach.conf
 echo "创建新的部署目录..."
 rm -rf $DEPLOY_DIR
 mkdir -p $DEPLOY_DIR
+# 进入项目目录
+cd $PROJECT_DIR
 cp -r dist/* $DEPLOY_DIR
 
 # 备份旧版本并替换为新版本
