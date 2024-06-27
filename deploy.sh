@@ -1,9 +1,14 @@
 #!/bin/bash
 
-# 检查 Nginx 配置文件是否存在
-if [ ! -f $NGINX_CONF ]; then
-    echo "创建 Nginx 配置文件..."
-    cat <<EOL > $NGINX_CONF
+# 检查 Nginx 配置文件是否存在，如果存在则删除
+if [ -f $NGINX_CONF ]; then
+    echo "Nginx 配置文件已存在，删除旧配置文件..."
+    rm -f $NGINX_CONF
+fi
+
+# 创建 Nginx 配置文件
+echo "创建 Nginx 配置文件..."
+cat <<EOL > $NGINX_CONF
 server {
     listen 80;
     server_name 120.76.206.153;
@@ -19,7 +24,7 @@ server {
         }
 }
 EOL
-fi
+echo "Nginx 配置文件创建完成: $NGINX_CONF"
 
 # 检查 Nginx 是否安装并启动
 if ! systemctl is-active --quiet nginx; then
