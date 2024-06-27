@@ -1,25 +1,5 @@
 #!/bin/bash
 
-# 项目路径
-PROJECT_DIR=/home/admin/vue-peach
-BACKUP_DIR=/home/admin/vue-peach_backup
-DEPLOY_DIR=/home/admin/vue-peach_new
-NGINX_CONF=/etc/nginx/conf.d/vue-peach.conf
-
-# 创建新的部署目录
-echo "创建新的部署目录..."
-rm -rf $DEPLOY_DIR
-mkdir -p $DEPLOY_DIR
-cp -r $PROJECT_DIR/* $DEPLOY_DIR
-
-# 备份旧版本并替换为新版本
-echo "备份旧版本并替换为新版本..."
-rm -rf $BACKUP_DIR
-if [ -d "$PROJECT_DIR" ]; then
-    mv $PROJECT_DIR $BACKUP_DIR
-fi
-mv $DEPLOY_DIR $PROJECT_DIR
-
 # 检查 Nginx 配置文件是否存在
 if [ ! -f $NGINX_CONF ]; then
     echo "创建 Nginx 配置文件..."
