@@ -2,15 +2,17 @@
 
 NGINX_CONF=/etc/nginx/conf.d/vue-peach.conf
 
-# 检查 Nginx 配置文件是否存在，如果存在则删除
+# 检查 Nginx 配置文件是否存在
 if [ -f $NGINX_CONF ]; then
-    echo "Nginx 配置文件已存在，删除旧配置文件..."
-    rm -f $NGINX_CONF
+    echo "Nginx 配置文件已存在，清空旧配置文件内容..."
+    sudo truncate -s 0 $NGINX_CONF
+else
+    echo "Nginx 配置文件不存在，创建新配置文件..."
 fi
 
-# 创建 Nginx 配置文件
-echo "创建 Nginx 配置文件..."
-cat <<EOL > $NGINX_CONF
+# 创建（或重写）新的 Nginx 配置文件
+echo "写入新的 Nginx 配置..."
+sudo cat <<EOL > $NGINX_CONF
 server {
     listen 80;
     server_name 120.76.206.153;
@@ -26,7 +28,6 @@ server {
         }
 }
 EOL
-echo "Nginx 配置文件创建完成: $NGINX_CONF"
 
 # 检查 Nginx 是否安装并启动
 if ! systemctl is-active --quiet nginx; then
