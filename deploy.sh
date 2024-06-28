@@ -1,5 +1,7 @@
 #!/bin/bash
 
+NGINX_CONF=/etc/nginx/conf.d/vue-peach.conf
+
 # 检查 Nginx 配置文件是否存在，如果存在则删除
 if [ -f $NGINX_CONF ]; then
     echo "Nginx 配置文件已存在，删除旧配置文件..."
