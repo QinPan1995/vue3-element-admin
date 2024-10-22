@@ -40,3 +40,4 @@ echo "重启 Nginx 服务..."
 systemctl restart nginx
 
 echo "部署完成！"
+# http://120.76.206.153/
